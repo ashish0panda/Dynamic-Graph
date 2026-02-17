@@ -2,19 +2,19 @@
 
 using namespace std;
 
-vector<int> BFS(vector<vector<int>>& graph,int n) {
+vector<int> DFS(vector<vector<int>>& graph,int n) {
     vector<int> visited_order;
     vector<bool> visited(n, false);
-    queue<int> q;
-    q.push(0);
+    stack<int> s;
+    s.push(0);
     visited[0]=true;
-    while(!q.empty()){
-        int node=q.front();
+    while(!s.empty()){
+        int node=s.top();
         visited_order.push_back(node);
-        q.pop();
+        s.pop();
         for(int child:graph[node]){
-            if(!visited[child]){
-                q.push(child);
+            if(!visited[child]) {
+                s.push(child);
                 visited[child]=true;
             }
         }
@@ -31,7 +31,7 @@ int main() {
         {2, 5},
         {1, 4}
     };
-    vector<int> visited_order=BFS(graph,6);
+    vector<int> visited_order=DFS(graph,6);
     for(auto node:visited_order){
         cout<<node<<" ";
     }
